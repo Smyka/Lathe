@@ -413,6 +413,11 @@ namespace OutlastTrayTool
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (config.LoadConfig()["presence"] == "Disabled")
+            {
+                trayIcon.Visible = false;
+                return;
+            }
             if (!realExit)
             {
                 e.Cancel = true;
