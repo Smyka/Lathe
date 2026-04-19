@@ -15,6 +15,9 @@ Showcase
 ------------
 
 ![](https://i.imgur.com/UCNrqDz.png)
+![](https://i.imgur.com/oSfSW1z.png)
+![](https://i.imgur.com/73Nso0S.png)
+![](https://i.imgur.com/Af3mER7.png)
    
 Installation
 ------------
