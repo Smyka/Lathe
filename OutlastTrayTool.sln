@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36127.28 d17.14
+VisualStudioVersion = 17.14.36127.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OutlastTrayTool", "OutlastTrayTool\OutlastTrayTool.csproj", "{16C118B6-B8FC-4658-96C9-B24C55496AA6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lathe", "OutlastTrayTool\Lathe.csproj", "{16C118B6-B8FC-4658-96C9-B24C55496AA6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
