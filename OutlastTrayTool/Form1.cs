@@ -51,23 +51,12 @@ namespace OutlastTrayTool
             modManager.StartDownloadWatcher();
             modManagerAPI = new ModManagerAPI();
 
-
-            //Thread.Sleep(30000);
-
-
-
-
-            //presence = new DiscordPresenceLoop();
-            //presence.StartLoop();
-
-            //gameManager.InstallReshade();
             LoadPresence();
             LoadTrayIcon();
             LoadFOVSlider();
             LoadScreenPercentageSlider();
             LoadFogComboBox();
             LoadCheckboxes();
-            //LoadModBrowser();
             LoadStartupComboBox();
             LoadPresenceComboBox();
             if (startupLaunch)
@@ -75,18 +64,10 @@ namespace OutlastTrayTool
                 WindowState = FormWindowState.Minimized;
                 ShowInTaskbar = false;
             }
-            //ModManagerAPI.LoadImageAsync("https://staticdelivery.nexusmods.com/mods/5376/images/thumbnails/183/183-1774727315-1298489264.png", pictureBox4);
-            //pictureBox4.Load(@"https://staticdelivery.nexusmods.com/mods/5376/images/198/198-1776295635-1243106224.png");
-
-
-            //LoadModBrowser();
 
             // set mods panel visible
             panel8.Visible = true;
 
-
-
-            //modManager.AddModToModMap("shit.pak", "Shit Mod");
             gameManager.ChangeFOV(120);
         }
 
