@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 /* 
@@ -16,6 +17,8 @@ namespace OutlastTrayTool
         private Dictionary<string, string> phases;
         private string logPath;
         private GameInfo gameSession;
+        private CancellationTokenSource? _cancellationTokenSource;
+        private volatile bool _shouldStop = false;
         public DiscordPresenceLoop() {
             phases = GameConstants.phases;
             logPath = Path.Combine(Environment.GetFolderPath(
@@ -70,50 +73,69 @@ namespace OutlastTrayTool
 
         public void StartLoop()
         {
-            while (true)
+            _cancellationTokenSource = new CancellationTokenSource();
+            CancellationToken token = _cancellationTokenSource.Token;
+            _shouldStop = false;
+
+            while (!_shouldStop && !token.IsCancellationRequested)
             {
-                gameSession = null;
-                if (gameClientOpen())
+                try
                 {
-                    gameSession = new GameInfo();
+                    gameSession = null;
 
-                    FileStream fs = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                    StreamReader reader = new StreamReader(fs);
-                    string line;
-
-                    while ((line = reader.ReadLine()) != null)
+                    if (gameClientOpen())
                     {
-                        processLine(line);
-                    }
+                        gameSession = new GameInfo();
 
-                    while (true)
-                    {
-                        line = reader.ReadLine();
+                        FileStream fs = new FileStream(logPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                        StreamReader reader = new StreamReader(fs);
+                        string line;
 
-                        if (line != null)
-                        {
-                            if (line.Contains("Log file closed"))
-                            {
-                                break;
-                            }
+                        while ((line = reader.ReadLine()) != null && !_shouldStop && !token.IsCancellationRequested)
                             processLine(line);
-                        }
-                        else
+
+                        while (!_shouldStop && !token.IsCancellationRequested)
                         {
-                            Thread.Sleep(1000);
+                            line = reader.ReadLine();
+
+                            if (line != null)
+                            {
+                                if (line.Contains("Log file closed")) break;
+                                processLine(line);
+                            }
+                            else
+                            {
+                                // Non-blocking sleep — checks cancellation every 100ms
+                                for (int i = 0; i < 10 && !_shouldStop && !token.IsCancellationRequested; i++)
+                                    System.Threading.Thread.Sleep(100);
+                            }
                         }
+
+                        reader.Close();
+                        fs.Close();
                     }
 
-                }
+                    try { gameSession?.Close(); } catch { }
 
-                if (gameSession != null)
-                {
-                    gameSession.Close();
+                    if (!_shouldStop && !token.IsCancellationRequested)
+                    {
+                        // Non-blocking 30s wait — exits immediately on stop
+                        for (int i = 0; i < 300 && !_shouldStop && !token.IsCancellationRequested; i++)
+                            System.Threading.Thread.Sleep(100);
+                    }
                 }
-                Thread.Sleep(30000);
-                
+                catch (OperationCanceledException) { break; }
+                catch (Exception) { /* keep running on non-fatal errors */ }
             }
-            
+
+            try { gameSession?.Close(); } catch { }
+        }
+
+        public void Stop()
+        {
+            _shouldStop = true;
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
         }
     }
 }

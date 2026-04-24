@@ -6,12 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>assets\LatheAviva_Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="assets\downloadIcon.png" />
-    <None Remove="assets\likeIcon.png" />
-    <None Remove="dxgi.dll" />
+    <None Remove="Resources\Kitty\Bimbo Doll.mp3" />
+    <None Remove="Resources\Kitty\Bumble Bee.mp3" />
+    <None Remove="Resources\Kitty\Caramelldansen.mp3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,9 +28,31 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="assets\LatheAviva_Icon.ico" />
+    <EmbeddedResource Include="assets\splash_lathe_portrait.jpg" />
+    <EmbeddedResource Include="Resources\Classical\Put Your Head On My Shoulder.mp3" />
+    <EmbeddedResource Include="Resources\Classical\Raindrops Keep Falling On My Head.mp3" />
+    <EmbeddedResource Include="Resources\Classical\Will You Love Me Tomorrow.mp3" />
+    <EmbeddedResource Include="Resources\Classical\Wishing It Was You.mp3" />
+    <EmbeddedResource Include="Resources\Electro\Poster Boy.mp3" />
+    <EmbeddedResource Include="Resources\Electro\Archangel.mp3" />
+    <EmbeddedResource Include="Resources\Electro\I Like The Way You Kiss Me.mp3" />
+    <EmbeddedResource Include="Resources\Electro\Ecstacy.mp3" />
+    <EmbeddedResource Include="Resources\Kitty\Bimbo Doll.mp3" />
+    <EmbeddedResource Include="Resources\Kitty\Boom, Boom, Boom, Boom.mp3" />
+    <EmbeddedResource Include="Resources\Kitty\Bumble Bee.mp3" />
+    <EmbeddedResource Include="Resources\Kitty\Caramelldansen.mp3" />
+    <EmbeddedResource Include="Resources\MurkoffRising\Diddy%27s Car.mp3" />
+    <EmbeddedResource Include="Resources\MurkoffRising\My Hoe Has A Kiddo.mp3" />
+    <EmbeddedResource Include="Resources\MurkoffRising\Verbatim.mp3" />
+    <EmbeddedResource Include="Resources\MurkoffRising\We Are Charlie Kirk.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DiscordRichPresence" Version="1.6.1.70" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.5" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.5" />
+    <PackageReference Include="NAudio" Version="2.3.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
     <PackageReference Include="SharpCompress" Version="0.47.4" />
     <PackageReference Include="SixLabors.ImageSharp" Version="3.1.12" />

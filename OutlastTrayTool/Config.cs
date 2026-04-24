@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -10,9 +10,9 @@ namespace OutlastTrayTool
 {
     public class Config
     {
-        public string configPath;
-        public string modFolderPath;
-        public IConfigurationRoot configuration;
+        public string configPath = string.Empty;
+        public string modFolderPath = string.Empty;
+        public IConfigurationRoot configuration = null!;
 
         public Config()
         {
@@ -91,7 +91,7 @@ namespace OutlastTrayTool
         public void ChangeProperty(string propertyName, string value)
         {
             string configJson = File.ReadAllText(configPath);
-            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson);
+            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson)!;
 
             configJsonObj[propertyName] = value;
 
@@ -106,7 +106,7 @@ namespace OutlastTrayTool
         public void ChangeProperty(string propertyName, int value)
         {
             string configJson = File.ReadAllText(configPath);
-            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson);
+            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson)!;
 
             configJsonObj[propertyName] = value;
 
@@ -121,7 +121,7 @@ namespace OutlastTrayTool
         public void ChangeProperty(string propertyName, JObject value)
         {
             string configJson = File.ReadAllText(configPath);
-            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson);
+            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson)!;
 
             configJsonObj[propertyName] = value;
 
@@ -136,7 +136,7 @@ namespace OutlastTrayTool
         public dynamic LoadConfig()
         {
             string configJson = File.ReadAllText(configPath);
-            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson);
+            dynamic configJsonObj = Newtonsoft.Json.JsonConvert.DeserializeObject(configJson)!;
 
             return configJsonObj;
         }

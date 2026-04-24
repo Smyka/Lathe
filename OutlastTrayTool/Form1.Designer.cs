@@ -51,8 +51,9 @@ namespace OutlastTrayTool
   private Label label12;
   private Button button9;
   private Panel panel8;
+  private Button buttonTheme;
+  private Button buttonMusic;
   private Label label13;
-  private FlowLayoutPanel flowLayoutPanel5;
 
         protected override void Dispose(bool disposing)
         {
@@ -284,7 +285,7 @@ namespace OutlastTrayTool
             label6.Name = "label6";
             label6.Size = new Size(70, 16);
             label6.TabIndex = 9;
-            label6.Text = "Version 0.1";
+            label6.Text = "Version 0.25";
             // 
             // label5
             // 
@@ -297,10 +298,42 @@ namespace OutlastTrayTool
             label5.Size = new Size(51, 20);
             label5.TabIndex = 8;
             label5.Text = "Lathe";
+            buttonTheme = new Button();
+            buttonMusic = new Button();
             // 
-            // button6
+            // buttonMusic
             // 
-            button6.BackColor = Color.FromArgb(36, 41, 46);
+            buttonMusic.BackColor = Color.FromArgb(36, 41, 46);
+            buttonMusic.FlatStyle = FlatStyle.Flat;
+            buttonMusic.FlatAppearance.BorderColor = SystemColors.WindowFrame;
+            buttonMusic.Font = new Font("Figtree", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonMusic.ForeColor = Color.Honeydew;
+            buttonMusic.Location = new Point(10, 382);
+            buttonMusic.Name = "buttonMusic";
+            buttonMusic.Size = new Size(210, 34);
+            buttonMusic.TabIndex = 21;
+            buttonMusic.Text = "Toggle Interface Music";
+            buttonMusic.UseVisualStyleBackColor = false;
+            buttonMusic.Click += buttonMusic_Click;
+            panel1.Controls.Add(buttonMusic);
+            // 
+            // buttonTheme
+            // 
+            buttonTheme.BackColor = Color.FromArgb(36, 41, 46);
+            buttonTheme.FlatStyle = FlatStyle.Flat;
+            buttonTheme.FlatAppearance.BorderColor = SystemColors.WindowFrame;
+            buttonTheme.Font = new Font("Figtree", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonTheme.ForeColor = Color.Honeydew;
+            buttonTheme.Location = new Point(10, 420);
+            buttonTheme.Name = "buttonTheme";
+            buttonTheme.Size = new Size(210, 34);
+            buttonTheme.TabIndex = 20;
+            buttonTheme.Text = "Toggle Gothic Theme";
+            buttonTheme.UseVisualStyleBackColor = false;
+            buttonTheme.Click += buttonTheme_Click;
+            panel1.Controls.Add(buttonTheme);
+
+
             button6.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             button6.FlatAppearance.MouseDownBackColor = Color.FromArgb(47, 54, 61);
             button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(47, 54, 61);
@@ -779,7 +812,7 @@ namespace OutlastTrayTool
             panel8.BorderStyle = BorderStyle.FixedSingle;
             panel8.Controls.Add(flowLayoutPanel5);
             panel8.Controls.Add(label13);
-            panel8.Location = new Point(2511, 10);
+            panel8.Location = new Point(251, 10);
             panel8.Name = "panel8";
             panel8.Size = new Size(720, 541);
             panel8.TabIndex = 15;

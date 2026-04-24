@@ -305,6 +305,27 @@ namespace OutlastTrayTool
         private static void OnError(object sender, ErrorEventArgs e) =>
             Debug.WriteLine(e.GetException());
 
-
+        public void StopDownloadWatcher()
+        {
+            if (_downloadWatcher != null)
+            {
+                try
+                {
+                    _downloadWatcher.EnableRaisingEvents = false;
+                    _downloadWatcher.Changed -= OnChanged;
+                    _downloadWatcher.Created -= OnCreated;
+                    _downloadWatcher.Deleted -= OnDeleted;
+                    _downloadWatcher.Renamed -= OnRenamed;
+                    _downloadWatcher.Error -= OnError;
+                    _downloadWatcher.Dispose();
+                    _downloadWatcher = null;
+                    Debug.WriteLine("Watcher stopped and disposed.");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Error stopping watcher: {ex.Message}");
+                }
+            }
+        }
     }
 }
