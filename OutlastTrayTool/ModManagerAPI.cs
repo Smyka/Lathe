@@ -92,6 +92,35 @@ namespace OutlastTrayTool
             return JsonConvert.DeserializeObject(result)!;
         }
 
+        public static async Task<dynamic> GetModVersion(int modId)
+        {
+            int gameId = 5376;
+            string apiUrl = "https://api.nexusmods.com/v2/graphql";
+
+            using HttpClient client = new HttpClient();
+
+            var queryString = @"query mod($modId: ID!, $gameId: ID!) {
+                                  mod(modId: $modId, gameId: $gameId) {
+                                    version
+                                  }
+                                }";
+            var requestPayload = new
+            {
+                query = queryString,
+                variables = new
+                {
+                    modId,
+                    gameId
+                }
+            };
+
+            var response = await client.PostAsJsonAsync(apiUrl, requestPayload);
+            response.EnsureSuccessStatusCode();
+
+            string result = await response.Content.ReadAsStringAsync();
+            return JsonConvert.DeserializeObject(result)!;
+        }
+
         public static async Task<dynamic> GetModFilesAsync(int modId)
         {
             int gameId = 5376;

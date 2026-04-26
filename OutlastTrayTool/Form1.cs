@@ -1,8 +1,12 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.Http.Json;
 using System.Reflection;
+using System.Security.AccessControl;
 using System.Security.Policy;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -20,36 +24,40 @@ namespace OutlastTrayTool
         private NotifyIcon trayIcon;
         private bool startupLaunch = false;
         private bool realExit = false;
+        private string currentVersion = "0.2";
 
         public Form1()
         {
 
             InitializeComponent();
-
+            Load += async (_, __) => await InitializeAsync();
+        }
+        private async Task InitializeAsync()
+        {
             startupLaunch = Environment.GetCommandLineArgs()
-        .Any(arg => arg.Equals("--startup", StringComparison.OrdinalIgnoreCase));
+                .Any(arg => arg.Equals("--startup", StringComparison.OrdinalIgnoreCase));
 
             config = new Config();
 
             gameManager = new GameManager(config);
             modManager = new ModManager(config);
 
-            modManager = new ModManager(config);
+            modManagerAPI = new ModManagerAPI();
+
+            await CheckModUpdatesAsync();
+
             modManager.SetRefreshUiAction(() =>
             {
                 if (InvokeRequired)
-                {
                     Invoke(new Action(LoadCheckboxes));
-                }
                 else
-                {
                     LoadCheckboxes();
-                }
             });
 
             modManager.RefreshMods();
             modManager.StartDownloadWatcher();
-            modManagerAPI = new ModManagerAPI();
+
+            CheckForUpdates();
 
             LoadPresence();
             LoadTrayIcon();
@@ -59,18 +67,48 @@ namespace OutlastTrayTool
             LoadCheckboxes();
             LoadStartupComboBox();
             LoadPresenceComboBox();
+
             if (startupLaunch)
             {
                 WindowState = FormWindowState.Minimized;
                 ShowInTaskbar = false;
             }
 
-            // set mods panel visible
             panel8.Visible = true;
-
-            gameManager.ChangeFOV(120);
         }
 
+        public async void CheckForUpdates()
+        {
+            string apiUrl = "https://raw.githubusercontent.com/Smyka/Lathe/refs/heads/master/api/appInformation.json";
+
+            try
+            {
+                using HttpClient client = new HttpClient();
+
+                var response = await client.GetAsync(apiUrl);
+
+                string result = await response.Content.ReadAsStringAsync();
+
+                dynamic finalResult = JsonConvert.DeserializeObject(result);
+                string webVersion = finalResult.version;
+
+                if (currentVersion != webVersion && currentVersion != "unknown")
+                {
+                    var choiceResult = MessageBox.Show($"An update is available for Lathe version {currentVersion}, click Yes to go to GitHub and download it or No to continue", "Link", MessageBoxButtons.YesNo);
+                    if (choiceResult == DialogResult.Yes)
+                    {
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = "https://github.com/Smyka/Lathe/releases",
+                            UseShellExecute = true
+                        });
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
 
         private void LoadPresence()
         {
@@ -106,6 +144,9 @@ namespace OutlastTrayTool
                     continue;
 
                 string modName = modObj["name"]?.ToString() ?? modGroup.Name;
+                string modVersion = modObj["version"]?.ToString() ?? modGroup.Name;
+                string update = modObj["update"]?.ToString() ??  modGroup.Name;
+                string modId = modGroup.Name;
 
                 if (modGroup.Name == "undefined")
                 {
@@ -120,11 +161,65 @@ namespace OutlastTrayTool
                 Label modNameLabel = new Label();
                 modNameLabel.Text = modName;
                 modNameLabel.AutoSize = true;
-                modNameLabel.Font = new Font("Figtree", 11f, FontStyle.Bold);
+                modNameLabel.Font = new Font("Segoe UI", 12f, FontStyle.Bold);
                 modNameLabel.ForeColor = Color.Honeydew;
-                modNameLabel.Margin = new Padding(3, 12, 3, 3);
+                modNameLabel.Margin = new Padding(3, 10, 0, 3);
+
+                
 
                 flowLayoutPanel1.Controls.Add(modNameLabel);
+
+                if (modGroup.Name != "undefined")
+                {
+                    int prefixLinkLength = 11 + modVersion.Length; // puts link area after version text
+                    LinkLabel versionLabel = new LinkLabel();
+                    versionLabel.Text = $"Version {modVersion} - Nexus page";
+                    versionLabel.LinkColor = Color.LightBlue;
+                    versionLabel.Links.Add(prefixLinkLength, 10, "");
+                    versionLabel.AutoSize = true;
+                    versionLabel.Font = new Font("Segoe UI", 8f, FontStyle.Regular);
+                    versionLabel.ForeColor = Color.Honeydew;
+                    versionLabel.Margin = new Padding(5, 0, 3, 0);
+
+                    
+
+                    versionLabel.LinkClicked += (s, ev) =>
+                    {
+                        string url = ev.Link.LinkData.ToString();
+                        Process.Start(new ProcessStartInfo
+                        {
+                            FileName = $"https://www.nexusmods.com/theoutlasttrials/mods/{modId}",
+                            UseShellExecute = true
+                        });
+                    };
+
+                    flowLayoutPanel1.Controls.Add(versionLabel);
+                    if (update == "True")
+                    {
+                        LinkLabel updateLabel = new LinkLabel();
+                        updateLabel.Text = "Update available!";
+                        updateLabel.Links.Add(0, 30, "");
+                        updateLabel.AutoSize = true;
+                        updateLabel.Font = new Font("Segoe UI", 8f, FontStyle.Regular);
+                        updateLabel.LinkColor = Color.LightGreen;
+                        updateLabel.Margin = new Padding(5, 0, 0, 0);
+
+                        updateLabel.LinkClicked += (s, ev) =>
+                        {
+                            string url = ev.Link.LinkData.ToString();
+                            Process.Start(new ProcessStartInfo
+                            {
+                                FileName = $"https://www.nexusmods.com/theoutlasttrials/mods/{modId}?tab=files",
+                                UseShellExecute = true
+                            });
+                        };
+
+                        flowLayoutPanel1.Controls.Add(updateLabel);
+                    }
+                }
+                
+
+                
 
                 foreach (JToken fileToken in files)
                 {
@@ -141,7 +236,7 @@ namespace OutlastTrayTool
                     chk.Name = "chk_" + fileName;
                     chk.AutoSize = true;
                     chk.Checked = isEnabled;
-                    chk.Font = new Font("Figtree", 10f);
+                    chk.Font = new Font("Segoe UI", 10f);
                     chk.Margin = new Padding(20, 2, 3, 2);
 
                     chk.CheckedChanged += (s, ev) =>
@@ -163,6 +258,61 @@ namespace OutlastTrayTool
 
                     flowLayoutPanel1.Controls.Add(chk);
                 }
+            }
+        }
+
+        public async Task CheckModUpdatesAsync()
+        {
+            JObject configObj = JObject.Parse(File.ReadAllText(config.configPath));
+            JObject modMap = (JObject)configObj["modMap"];
+
+            bool changed = false;
+
+            foreach (JProperty modGroup in modMap.Properties())
+            {
+                if (modGroup.Name == "undefined")
+                    continue;
+
+                if (modGroup.Value is not JObject modObj)
+                    continue;
+
+                string modId = modGroup.Name;
+                string localVersion = modObj["version"]?.ToString() ?? "0";
+
+                try
+                {
+                    dynamic json = await ModManagerAPI.GetModVersion(Convert.ToInt32(modId));
+                    string webVersion = json.data.mod.version?.ToString();
+
+                    if (string.IsNullOrWhiteSpace(webVersion))
+                        continue;
+
+                    bool hasUpdate = localVersion.Trim() != webVersion.Trim();
+
+                    bool previousValue = modObj["update"]?.Value<bool>() ?? false;
+
+                    modObj["update"] = hasUpdate;
+
+                    if (previousValue != hasUpdate)
+                        changed = true;
+                }
+                catch
+                {
+                    bool previousValue = modObj["update"]?.Value<bool>() ?? false;
+
+                    modObj["update"] = false;
+
+                    if (previousValue != false)
+                        changed = true;
+                }
+            }
+
+            if (changed)
+            {
+                File.WriteAllText(
+                    config.configPath,
+                    configObj.ToString(Formatting.Indented)
+                );
             }
         }
 
@@ -194,7 +344,7 @@ namespace OutlastTrayTool
         }
 
 
-        private async void LoadModBrowser() // add page param later
+        /*private async void LoadModBrowser() // add page param later
         {
             dynamic json = await ModManagerAPI.GetModPageAsync();
 
@@ -339,7 +489,7 @@ namespace OutlastTrayTool
 
                 flowLayoutPanel5.Controls.Add(panel);
             }
-        }
+        }*/
 
         private void LoadTrayIcon()
         {
@@ -609,10 +759,6 @@ namespace OutlastTrayTool
 
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            gameManager.InstallReshade();
-        }
 
         private void label11_Click(object sender, EventArgs e)
         {
@@ -677,9 +823,9 @@ namespace OutlastTrayTool
             }
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void label6_Click(object sender, EventArgs e)
         {
-            gameManager.UninstallReshade();
+
         }
     }
 }

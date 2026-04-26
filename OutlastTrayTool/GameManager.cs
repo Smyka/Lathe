@@ -136,34 +136,6 @@ namespace OutlastTrayTool
 
         }
 
-        public void InstallReshade()
-        {
-            string reshadeDll = Path.Combine(Environment.CurrentDirectory, "ReshadeAssets/dxgi.dll");
-            string reshadeDllDest = Path.Combine(_ReshadeInstallFolderPath, "dxgi.dll");
-            try { 
-                File.Copy(reshadeDll, reshadeDllDest);
-                MessageBox.Show("Reshade installed");
-            }
-            catch (IOException ex) {
-                MessageBox.Show("Reshade already installed");
-            }
-        }
-
-        public void UninstallReshade()
-        {
-            string reshadeDll = Path.Combine(Environment.CurrentDirectory, "ReshadeAssets/dxgi.dll");
-            string reshadeDllDest = Path.Combine(_ReshadeInstallFolderPath, "dxgi.dll");
-            try
-            {
-                File.Delete(reshadeDllDest);
-                MessageBox.Show("Reshade uninstalled");
-            }
-            catch (IOException ex)
-            {
-                MessageBox.Show("Uninstall failed");
-            }
-        }
-
 
 
     }

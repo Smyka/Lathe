@@ -119,7 +119,7 @@ namespace OutlastTrayTool
             _userConfig.ChangeProperty("modMap", modMap);
         }
 
-        public void RegisterMod(string modId, string modName, string fileName)
+        public void RegisterMod(string modId, string modName, string fileName, string modVersion)
         {
 
             dynamic config = _userConfig.LoadConfig();
@@ -129,6 +129,8 @@ namespace OutlastTrayTool
             {
                 modMap[modId] = new JObject();
                 modMap[modId]["name"] = modName;
+                modMap[modId]["version"] = modVersion;
+                modMap[modId]["update"] = false;
                 modMap[modId]["files"] = new JArray();
             }
 
@@ -138,20 +140,22 @@ namespace OutlastTrayTool
         }
         public void AddMod(string fileName)
         {
-            AddModInternal(fileName, "undefined", "Undefined");
+            AddModInternal(fileName, "undefined", "Undefined", "Undefined");
         }
 
         public async Task AddMod(string fileName, string modId)
         {
             dynamic json = await ModManagerAPI.GetModName(Convert.ToInt32(modId));
             string modName = json.data.mod.name;
+            dynamic json2 = await ModManagerAPI.GetModVersion(Convert.ToInt32(modId));
+            string modVersion = json2.data.mod.version;
 
             Debug.WriteLine(modName);
 
-            AddModInternal(fileName, modId, modName);
+            AddModInternal(fileName, modId, modName, modVersion);
         }
 
-        private void AddModInternal(string fileName, string modId, string modName)
+        private void AddModInternal(string fileName, string modId, string modName, string modVersion)
         {
             string fileType = Path.GetExtension(fileName).ToLower();
 
@@ -164,7 +168,7 @@ namespace OutlastTrayTool
 
                         File.Copy(fileName, outputPath, true);
 
-                        RegisterMod(modId, modName, pakName);
+                        RegisterMod(modId, modName, pakName, modVersion);
                         RefreshMods();
                         RefreshUi();
                         Debug.WriteLine($"Installed pak: {pakName}");
@@ -184,7 +188,7 @@ namespace OutlastTrayTool
 
                                     file.ExtractToFile(outputPath, true);
 
-                                    RegisterMod(modId, modName, pakName);
+                                    RegisterMod(modId, modName, pakName, modVersion);
                                     RefreshMods();
                                     RefreshUi();
                                     Debug.WriteLine($"Extracted pak from zip: {pakName}");
@@ -213,7 +217,7 @@ namespace OutlastTrayTool
                                         Overwrite = true
                                     });
 
-                                    RegisterMod(modId, modName, pakName);
+                                    RegisterMod(modId, modName, pakName, modVersion);
                                     RefreshMods();
                                     RefreshUi();
                                     Debug.WriteLine($"Extracted pak from archive: {pakName}");

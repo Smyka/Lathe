@@ -19,8 +19,14 @@ namespace OutlastTrayTool
                 return;
             }
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
-            mutex.ReleaseMutex();
+            try
+            {
+                Application.Run(new Form1());
+            }
+            finally
+            {
+                mutex.ReleaseMutex();
+            }
         }
     }
 }

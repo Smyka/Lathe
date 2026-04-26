@@ -45,11 +45,6 @@ namespace OutlastTrayTool
   private PictureBox pictureBox3;
   private Label label9;
   private FlowLayoutPanel flowLayoutPanel3;
-  private Panel panel10;
-  private PictureBox pictureBox6;
-  private Button button11;
-  private Label label12;
-  private Button button9;
   private Panel panel8;
   private Label label13;
   private FlowLayoutPanel flowLayoutPanel5;
@@ -87,11 +82,6 @@ namespace OutlastTrayTool
             panel4 = new Panel();
             label9 = new Label();
             flowLayoutPanel3 = new FlowLayoutPanel();
-            panel10 = new Panel();
-            button9 = new Button();
-            pictureBox6 = new PictureBox();
-            button11 = new Button();
-            label12 = new Label();
             label7 = new Label();
             flowLayoutPanel2 = new FlowLayoutPanel();
             panel5 = new Panel();
@@ -132,9 +122,6 @@ namespace OutlastTrayTool
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
-            flowLayoutPanel3.SuspendLayout();
-            panel10.SuspendLayout();
-            ((ISupportInitialize)pictureBox6).BeginInit();
             flowLayoutPanel2.SuspendLayout();
             panel5.SuspendLayout();
             ((ISupportInitialize)pictureBox1).BeginInit();
@@ -187,7 +174,7 @@ namespace OutlastTrayTool
             button2.BackColor = Color.FromArgb(47, 54, 61);
             button2.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Font = new Font("Segoe UI", 9.75F);
             button2.ForeColor = Color.Honeydew;
             button2.Location = new Point(527, 66);
             button2.Name = "button2";
@@ -202,7 +189,7 @@ namespace OutlastTrayTool
             button1.BackColor = Color.FromArgb(47, 54, 61);
             button1.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Font = new Font("Segoe UI", 9.75F);
             button1.ForeColor = Color.Honeydew;
             button1.Location = new Point(527, 104);
             button1.Name = "button1";
@@ -234,7 +221,7 @@ namespace OutlastTrayTool
             button3.BackColor = Color.FromArgb(47, 54, 61);
             button3.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
             button3.FlatStyle = FlatStyle.Flat;
-            button3.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button3.Font = new Font("Segoe UI", 9.75F);
             button3.ForeColor = Color.Honeydew;
             button3.Location = new Point(191, 97);
             button3.Name = "button3";
@@ -248,7 +235,7 @@ namespace OutlastTrayTool
             // 
             textBox2.BackColor = Color.FromArgb(64, 64, 64);
             textBox2.BorderStyle = BorderStyle.FixedSingle;
-            textBox2.Font = new Font("Figtree", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox2.ForeColor = Color.White;
             textBox2.Location = new Point(132, 97);
             textBox2.MaxLength = 4;
@@ -278,19 +265,20 @@ namespace OutlastTrayTool
             // 
             label6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label6.AutoSize = true;
-            label6.Font = new Font("Figtree", 9.749999F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.Font = new Font("Segoe UI", 9.749999F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label6.ForeColor = Color.Honeydew;
             label6.Location = new Point(5, 518);
             label6.Name = "label6";
-            label6.Size = new Size(70, 16);
+            label6.Size = new Size(73, 16);
             label6.TabIndex = 9;
-            label6.Text = "Version 0.1";
+            label6.Text = "Version 0.2";
+            label6.Click += label6_Click;
             // 
             // label5
             // 
             label5.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Font = new Font("Figtree", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label5.Font = new Font("Segoe UI", 11.9999981F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.Honeydew;
             label5.Location = new Point(5, 498);
             label5.Name = "label5";
@@ -305,7 +293,7 @@ namespace OutlastTrayTool
             button6.FlatAppearance.MouseDownBackColor = Color.FromArgb(47, 54, 61);
             button6.FlatAppearance.MouseOverBackColor = Color.FromArgb(47, 54, 61);
             button6.FlatStyle = FlatStyle.Flat;
-            button6.Font = new Font("Figtree SemiBold", 18F, FontStyle.Bold);
+            button6.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             button6.ForeColor = Color.Honeydew;
             button6.Image = (Image)resources.GetObject("button6.Image");
             button6.ImageAlign = ContentAlignment.MiddleLeft;
@@ -314,7 +302,7 @@ namespace OutlastTrayTool
             button6.Padding = new Padding(10, 0, 0, 0);
             button6.Size = new Size(231, 70);
             button6.TabIndex = 7;
-            button6.Text = "Presence";
+            button6.Text = "Presence  ";
             button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
             // 
@@ -325,7 +313,7 @@ namespace OutlastTrayTool
             button5.FlatAppearance.MouseDownBackColor = Color.FromArgb(47, 54, 61);
             button5.FlatAppearance.MouseOverBackColor = Color.FromArgb(47, 54, 61);
             button5.FlatStyle = FlatStyle.Flat;
-            button5.Font = new Font("Figtree SemiBold", 18F, FontStyle.Bold);
+            button5.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             button5.ForeColor = Color.Honeydew;
             button5.Image = (Image)resources.GetObject("button5.Image");
             button5.ImageAlign = ContentAlignment.MiddleLeft;
@@ -334,7 +322,7 @@ namespace OutlastTrayTool
             button5.Padding = new Padding(10, 0, 0, 0);
             button5.Size = new Size(231, 70);
             button5.TabIndex = 6;
-            button5.Text = "Tweaks    ";
+            button5.Text = "Tweaks     ";
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
@@ -345,7 +333,7 @@ namespace OutlastTrayTool
             button4.FlatAppearance.MouseDownBackColor = Color.FromArgb(47, 54, 61);
             button4.FlatAppearance.MouseOverBackColor = Color.FromArgb(47, 54, 61);
             button4.FlatStyle = FlatStyle.Flat;
-            button4.Font = new Font("Figtree SemiBold", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button4.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
             button4.ForeColor = Color.Honeydew;
             button4.Image = (Image)resources.GetObject("button4.Image");
             button4.ImageAlign = ContentAlignment.MiddleLeft;
@@ -380,11 +368,11 @@ namespace OutlastTrayTool
             button13.BackColor = Color.FromArgb(47, 54, 61);
             button13.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             button13.FlatStyle = FlatStyle.Flat;
-            button13.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button13.Font = new Font("Segoe UI", 9.75F);
             button13.ForeColor = Color.Honeydew;
             button13.Location = new Point(527, 180);
             button13.Name = "button13";
-            button13.Size = new Size(88, 43);
+            button13.Size = new Size(88, 67);
             button13.TabIndex = 18;
             button13.Text = "Open Nexus\r\nMod Page\r\n";
             button13.UseVisualStyleBackColor = false;
@@ -395,7 +383,7 @@ namespace OutlastTrayTool
             button10.BackColor = Color.FromArgb(47, 54, 61);
             button10.FlatAppearance.BorderColor = SystemColors.WindowFrame;
             button10.FlatStyle = FlatStyle.Flat;
-            button10.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button10.Font = new Font("Segoe UI", 9.75F);
             button10.ForeColor = Color.Honeydew;
             button10.Location = new Point(527, 142);
             button10.Name = "button10";
@@ -449,80 +437,17 @@ namespace OutlastTrayTool
             label9.Size = new Size(52, 21);
             label9.TabIndex = 15;
             label9.Text = "Other";
+            label9.Visible = false;
             // 
             // flowLayoutPanel3
             // 
             flowLayoutPanel3.AutoScroll = true;
-            flowLayoutPanel3.Controls.Add(panel10);
             flowLayoutPanel3.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel3.Location = new Point(345, 66);
             flowLayoutPanel3.Name = "flowLayoutPanel3";
             flowLayoutPanel3.Size = new Size(299, 553);
             flowLayoutPanel3.TabIndex = 14;
-            // 
-            // panel10
-            // 
-            panel10.BorderStyle = BorderStyle.FixedSingle;
-            panel10.Controls.Add(button9);
-            panel10.Controls.Add(pictureBox6);
-            panel10.Controls.Add(button11);
-            panel10.Controls.Add(label12);
-            panel10.Location = new Point(3, 3);
-            panel10.Name = "panel10";
-            panel10.Size = new Size(292, 116);
-            panel10.TabIndex = 15;
-            // 
-            // button9
-            // 
-            button9.BackColor = Color.FromArgb(47, 54, 61);
-            button9.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button9.ForeColor = Color.Honeydew;
-            button9.Location = new Point(64, 63);
-            button9.Name = "button9";
-            button9.Size = new Size(75, 27);
-            button9.TabIndex = 12;
-            button9.Text = "Uninstall";
-            button9.UseVisualStyleBackColor = false;
-            button9.Click += button9_Click;
-            // 
-            // pictureBox6
-            // 
-            pictureBox6.Image = (Image)resources.GetObject("pictureBox6.Image");
-            pictureBox6.Location = new Point(247, 23);
-            pictureBox6.Name = "pictureBox6";
-            pictureBox6.Size = new Size(19, 19);
-            pictureBox6.TabIndex = 11;
-            pictureBox6.TabStop = false;
-            FOVtooltip.SetToolTip(pictureBox6, "USE AT YOUR OWN RISK. Reshade could be viewed\r\nby Easy Anti Cheat as a cheat. Reshade is a tool that\r\nlets you run custom shaders");
-            // 
-            // button11
-            // 
-            button11.BackColor = Color.FromArgb(47, 54, 61);
-            button11.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
-            button11.FlatStyle = FlatStyle.Flat;
-            button11.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button11.ForeColor = Color.Honeydew;
-            button11.Location = new Point(145, 63);
-            button11.Name = "button11";
-            button11.Size = new Size(121, 27);
-            button11.TabIndex = 7;
-            button11.Text = "Install Reshade";
-            button11.UseVisualStyleBackColor = false;
-            button11.Click += button11_Click;
-            // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label12.ForeColor = Color.Honeydew;
-            label12.Location = new Point(111, 19);
-            label12.Name = "label12";
-            label12.Size = new Size(69, 21);
-            label12.TabIndex = 5;
-            label12.Text = "Reshade";
-            toolTip1.SetToolTip(label12, "USE AT YOUR OWN RISK. Reshade could be viewed\r\nby Easy Anti Cheat as a cheat. Reshade is a tool that\r\nlets you run custom shaders");
+            flowLayoutPanel3.Visible = false;
             // 
             // label7
             // 
@@ -611,7 +536,7 @@ namespace OutlastTrayTool
             // 
             textBox1.BackColor = Color.FromArgb(64, 64, 64);
             textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Font = new Font("Figtree", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox1.ForeColor = Color.White;
             textBox1.Location = new Point(132, 98);
             textBox1.MaxLength = 4;
@@ -627,7 +552,7 @@ namespace OutlastTrayTool
             button7.BackColor = Color.FromArgb(47, 54, 61);
             button7.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
             button7.FlatStyle = FlatStyle.Flat;
-            button7.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button7.Font = new Font("Segoe UI", 9.75F);
             button7.ForeColor = Color.Honeydew;
             button7.Location = new Point(191, 98);
             button7.Name = "button7";
@@ -689,7 +614,7 @@ namespace OutlastTrayTool
             button8.BackColor = Color.FromArgb(47, 54, 61);
             button8.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
             button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button8.Font = new Font("Segoe UI", 9.75F);
             button8.ForeColor = Color.Honeydew;
             button8.Location = new Point(191, 63);
             button8.Name = "button8";
@@ -859,7 +784,7 @@ namespace OutlastTrayTool
             button18.BackColor = Color.FromArgb(47, 54, 61);
             button18.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
             button18.FlatStyle = FlatStyle.Flat;
-            button18.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button18.Font = new Font("Segoe UI", 9.75F);
             button18.ForeColor = Color.Honeydew;
             button18.Location = new Point(191, 63);
             button18.Name = "button18";
@@ -901,7 +826,7 @@ namespace OutlastTrayTool
             button16.BackColor = Color.FromArgb(47, 54, 61);
             button16.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
             button16.FlatStyle = FlatStyle.Flat;
-            button16.Font = new Font("Figtree", 9.749999F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button16.Font = new Font("Segoe UI", 9.75F);
             button16.ForeColor = Color.Honeydew;
             button16.Location = new Point(191, 63);
             button16.Name = "button16";
@@ -934,9 +859,9 @@ namespace OutlastTrayTool
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel8);
-            Controls.Add(panel4);
             Controls.Add(panel2);
             Controls.Add(panel9);
+            Controls.Add(panel4);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(930, 400);
             Name = "Form1";
@@ -952,10 +877,6 @@ namespace OutlastTrayTool
             panel2.PerformLayout();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
-            flowLayoutPanel3.ResumeLayout(false);
-            panel10.ResumeLayout(false);
-            panel10.PerformLayout();
-            ((ISupportInitialize)pictureBox6).EndInit();
             flowLayoutPanel2.ResumeLayout(false);
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
