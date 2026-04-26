@@ -22,5 +22,4 @@ Showcase
 Installation
 ------------
 
-test
-
+Download and extract Lathe.zip from the [releases](https://github.com/Smyka/Lathe/releases) page. Then run Lathe.exe
