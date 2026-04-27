@@ -284,7 +284,12 @@ namespace OutlastTrayTool
                     string prefixRemoved = line[41..]; // removes line above, mod id is right after it
                     string modId = prefixRemoved.Split("/")[0];
                     AddMod(e.FullPath, modId);
-                    //RegisterMod(modId, "test!", "poop.pak");
+                }
+                if (line.Contains("https://cf-files.nexusmods.com/cdn/5376/"))
+                {
+                    string prefixRemoved = line[48..]; // removes line above, mod id is right after it
+                    string modId = prefixRemoved.Split("/")[0];
+                    AddMod(e.FullPath, modId);
                 }
             }
             Debug.Write(text);
