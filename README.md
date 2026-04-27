@@ -24,3 +24,11 @@ Installation
 ------------
 
 Download and extract Lathe.zip from the [releases](https://github.com/Smyka/Lathe/releases) page. Then run Lathe.exe
+
+Building
+------------
+
+- Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) with the .NET desktop environment workload
+- Create a new project by selecting clone a repository and enter the following repo URL
+```https://github.com/Smyka/Lathe.git```
+- Press Build and then Build Lathe, it should take a minute to download the neccesary packages
