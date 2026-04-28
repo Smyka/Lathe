@@ -24,7 +24,7 @@ namespace OutlastTrayTool
         private NotifyIcon trayIcon;
         private bool startupLaunch = false;
         private bool realExit = false;
-        private string currentVersion = "0.2";
+        private string currentVersion = "0.2.1";
 
         public Form1()
         {
