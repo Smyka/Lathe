@@ -279,18 +279,14 @@ namespace OutlastTrayTool
             string[] text = File.ReadAllLines(path);
             foreach (string line in text)
             {
-                if (line.Contains("https://files.nexus-cdn.com/5376/"))
+                // hopefully more dynamic way to check this
+                if (line.Contains("/5376/"))
                 {
-                    string prefixRemoved = line[41..]; // removes line above, mod id is right after it
-                    string modId = prefixRemoved.Split("/")[0];
+                    int start = line.IndexOf("5376/") + 5;
+                    string modId = line[start..].Split('/')[0];
                     AddMod(e.FullPath, modId);
                 }
-                if (line.Contains("https://cf-files.nexusmods.com/cdn/5376/"))
-                {
-                    string prefixRemoved = line[48..]; // removes line above, mod id is right after it
-                    string modId = prefixRemoved.Split("/")[0];
-                    AddMod(e.FullPath, modId);
-                }
+
             }
             Debug.Write(text);
             Debug.WriteLine($"Changed: {e.FullPath}");
