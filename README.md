@@ -23,7 +23,7 @@ Showcase
 Installation
 ------------
 
-Download and extract Lathe.zip from the [releases](https://github.com/Smyka/Lathe/releases) page. Then run Lathe.exe
+Download and extract Lathe.zip from the [releases](https://github.com/Smyka/Lathe/releases) or [nexusmods.com](https://www.nexusmods.com/theoutlasttrials/mods/217) page. Then run Lathe.exe
 
 Building
 ------------
