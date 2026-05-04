@@ -24,7 +24,7 @@ namespace OutlastTrayTool
         private NotifyIcon trayIcon;
         private bool startupLaunch = false;
         private bool realExit = false;
-        private string currentVersion = "0.2.1";
+        private string currentVersion = "0.4";
 
         public Form1()
         {
@@ -38,6 +38,21 @@ namespace OutlastTrayTool
                 .Any(arg => arg.Equals("--startup", StringComparison.OrdinalIgnoreCase));
 
             config = new Config();
+
+            bool loadedConstants = await GameConstants.TryLoadWithRetryAsync();
+
+            if (!loadedConstants)
+            {
+                MessageBox.Show(
+                    "Lathe couldn't connect to the internet to load required game data. Please check your connection and restart Lathe.",
+                    "Internet Connection Required",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+
+                Application.Exit();
+                return;
+            }
 
             gameManager = new GameManager(config);
             modManager = new ModManager(config);
@@ -94,12 +109,12 @@ namespace OutlastTrayTool
 
                 if (currentVersion != webVersion && currentVersion != "unknown")
                 {
-                    var choiceResult = MessageBox.Show($"An update is available for Lathe version {currentVersion}, click Yes to go to GitHub and download it or No to continue", "Link", MessageBoxButtons.YesNo);
+                    var choiceResult = MessageBox.Show($"An update is available for Lathe version {webVersion}, click Yes to go to Nexusmods and download it or No to continue", "Link", MessageBoxButtons.YesNo);
                     if (choiceResult == DialogResult.Yes)
                     {
                         Process.Start(new ProcessStartInfo
                         {
-                            FileName = "https://github.com/Smyka/Lathe/releases",
+                            FileName = "https://www.nexusmods.com/theoutlasttrials/mods/217?tab=files",
                             UseShellExecute = true
                         });
                     }
@@ -114,11 +129,27 @@ namespace OutlastTrayTool
         {
             if (config.LoadConfig()["presence"] == "Enabled")
             {
-                presence = new DiscordPresenceLoop();
-                Task.Run(() => presence.StartLoop());
+                StartPresenceLoop();
+            }
+        }
+
+        private void StartPresenceLoop()
+        {
+            if (presence != null)
+            {
+                return;
             }
 
+            presence = new DiscordPresenceLoop();
+            Task.Run(() => presence.StartLoop());
         }
+
+        private void StopPresenceLoop()
+        {
+            presence?.Stop();
+            presence = null;
+        }
+
         private void LoadCheckboxes()
         {
             flowLayoutPanel1.Controls.Clear();
@@ -544,24 +575,42 @@ namespace OutlastTrayTool
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (config.LoadConfig()["presence"] == "Disabled")
+            if (realExit)
             {
                 trayIcon.Visible = false;
                 return;
             }
-            if (!realExit)
+
+            if (config.LoadConfig()["presence"] != "Enabled")
+            {
+                trayIcon.Visible = false;
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(
+                "Lathe needs to be running in the background in order for Discord presence to work.\nClick Yes to fully close lathe or No to hide Lathe.",
+                "Fully close Lathe?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (result == DialogResult.No)
             {
                 e.Cancel = true;
                 Hide();
 
-                trayIcon.ShowBalloonTip(
-                    1000,
-                    "Still running",
-                    "Lathe is still running in the tray.",
-                    ToolTipIcon.Info
-                );
+                return;
             }
+
+            if (result == DialogResult.Yes)
+            {
+                realExit = true;
+                trayIcon.Visible = false;
+                return;
+            }
+            e.Cancel = true;
         }
+
 
         private void ResetMenuButtonColorsAndBorders()
         {
@@ -796,18 +845,25 @@ namespace OutlastTrayTool
 
         private void button18_Click(object sender, EventArgs e)
         {
-            if (comboBox2.SelectedItem == "Enabled")
+            if (comboBox2.SelectedItem?.ToString() == "Enabled")
             {
                 if (config.LoadConfig()["startup"] == "Disabled")
                 {
-                    MessageBox.Show("Discord presence has been enabled for this session\nHowever, it will not properly work after restarts unless you enable\n launch on startup");
+                    MessageBox.Show(
+                        "Discord presence has been enabled for this session\nHowever, it will not properly work after restarts unless you enable\n launch on startup"
+                    );
                 }
-                presence = new DiscordPresenceLoop();
-                Task.Run(() => presence.StartLoop());
+
+                StartPresenceLoop();
                 config.ChangeProperty("presence", "Enabled");
             }
-
+            else
+            {
+                StopPresenceLoop();
+                config.ChangeProperty("presence", "Disabled");
+            }
         }
+
 
         private void button16_Click(object sender, EventArgs e)
         {

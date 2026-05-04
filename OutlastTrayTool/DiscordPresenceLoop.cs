@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,7 +71,7 @@ namespace OutlastTrayTool
 
         public void StartLoop()
         {
-            while (true)
+            while (!stopRequested)
             {
                 gameSession = null;
                 if (gameClientOpen())
@@ -86,7 +87,7 @@ namespace OutlastTrayTool
                         processLine(line);
                     }
 
-                    while (true)
+                    while (!stopRequested)
                     {
                         line = reader.ReadLine();
 
@@ -96,24 +97,48 @@ namespace OutlastTrayTool
                             {
                                 break;
                             }
+
                             processLine(line);
                         }
                         else
                         {
+                            if (!Process.GetProcessesByName("TOTClient-Win64-Shipping").Any())
+                            {
+                                break;
+                            }
+
                             Thread.Sleep(1000);
                         }
                     }
+
 
                 }
 
                 if (gameSession != null)
                 {
                     gameSession.Close();
+                    gameSession = null;
                 }
-                Thread.Sleep(30000);
-                
+                for (int i = 0; i < 30 && !stopRequested; i++)
+                {
+                    Thread.Sleep(1000);
+                }
+
+
             }
-            
+
         }
+        private bool stopRequested = false;
+
+        public void Stop()
+        {
+            stopRequested = true;
+            if (gameSession != null)
+            {
+                gameSession.Close();
+                gameSession = null;
+            }
+        }
+
     }
 }

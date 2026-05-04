@@ -240,7 +240,7 @@ namespace OutlastTrayTool
             textBox2.Location = new Point(132, 97);
             textBox2.MaxLength = 4;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(50, 22);
+            textBox2.Size = new Size(50, 23);
             textBox2.TabIndex = 8;
             textBox2.TextAlign = HorizontalAlignment.Center;
             textBox2.TextChanged += textBox2_TextChanged;
@@ -269,9 +269,9 @@ namespace OutlastTrayTool
             label6.ForeColor = Color.Honeydew;
             label6.Location = new Point(5, 518);
             label6.Name = "label6";
-            label6.Size = new Size(73, 16);
+            label6.Size = new Size(76, 17);
             label6.TabIndex = 9;
-            label6.Text = "Version 0.2";
+            label6.Text = "Version 0.4";
             label6.Click += label6_Click;
             // 
             // label5
@@ -282,7 +282,7 @@ namespace OutlastTrayTool
             label5.ForeColor = Color.Honeydew;
             label5.Location = new Point(5, 498);
             label5.Name = "label5";
-            label5.Size = new Size(51, 20);
+            label5.Size = new Size(52, 21);
             label5.TabIndex = 8;
             label5.Text = "Lathe";
             // 
@@ -541,7 +541,7 @@ namespace OutlastTrayTool
             textBox1.Location = new Point(132, 98);
             textBox1.MaxLength = 4;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(50, 22);
+            textBox1.Size = new Size(50, 23);
             textBox1.TabIndex = 8;
             textBox1.TextAlign = HorizontalAlignment.Center;
             textBox1.TextChanged += textBox1_TextChanged_1;

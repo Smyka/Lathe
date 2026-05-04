@@ -27,7 +27,7 @@ namespace OutlastTrayTool
             // so I create a temp string here
             string initialGamePath = _userConfig.LoadConfig()["gamePath"];
             _gameModFolderPath = Path.Combine(initialGamePath, "OPP/Content/Paks");
-            _toolModFolderPath = Path.Combine(Environment.CurrentDirectory, "Mods");
+            _toolModFolderPath = _userConfig.modFolderPath;
         }
 
         public void SetRefreshUiAction(Action refreshUi)
@@ -275,22 +275,37 @@ namespace OutlastTrayTool
             {
                 return;
             }
-            string path = $"{e.FullPath}:Zone.Identifier";
-            string[] text = File.ReadAllLines(path);
-            foreach (string line in text)
-            {
-                // hopefully more dynamic way to check this
-                if (line.Contains("/5376/"))
-                {
-                    int start = line.IndexOf("5376/") + 5;
-                    string modId = line[start..].Split('/')[0];
-                    AddMod(e.FullPath, modId);
-                }
 
+            try
+            {
+                string zoneIdentifierPath = $"{e.FullPath}:Zone.Identifier";
+
+
+                string[] text = File.ReadAllLines(zoneIdentifierPath);
+
+                foreach (string line in text)
+                {
+                    if (line.Contains("/5376/"))
+                    {
+                        int start = line.IndexOf("5376/") + 5;
+                        string modId = line[start..].Split('/')[0];
+
+                        _ = AddMod(e.FullPath, modId);
+                        return;
+                    }
+                }
             }
-            Debug.Write(text);
-            Debug.WriteLine($"Changed: {e.FullPath}");
+            catch (Exception ex) when (
+                ex is FileNotFoundException ||
+                ex is DirectoryNotFoundException ||
+                ex is IOException ||
+                ex is UnauthorizedAccessException
+            )
+            {
+                Debug.WriteLine($"Could not read download metadata for {e.FullPath}: {ex.Message}");
+            }
         }
+
 
         private static void OnCreated(object sender, FileSystemEventArgs e)
         {

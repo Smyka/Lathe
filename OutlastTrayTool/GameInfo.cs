@@ -139,6 +139,7 @@ namespace OutlastTrayTool
 
         public void Close()
         {
+            client.ClearPresence();
             client.Dispose();
         }
     }

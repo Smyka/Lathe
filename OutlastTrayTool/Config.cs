@@ -16,10 +16,15 @@ namespace OutlastTrayTool
 
         public Config()
         {
-            string appFolder = AppDomain.CurrentDomain.BaseDirectory;
+            string appDataFolder = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Lathe"
+            );
+            Directory.CreateDirectory(appDataFolder);
 
-            configPath = Path.Combine(appFolder, "config.json");
-            modFolderPath = Path.Combine(appFolder, "Mods");
+            configPath = Path.Combine(appDataFolder, "config.json");
+            modFolderPath = Path.Combine(appDataFolder, "Mods");
+
 
             if (!File.Exists(configPath))
             {
@@ -55,7 +60,7 @@ namespace OutlastTrayTool
 
                     if (dialog.ShowDialog() != DialogResult.OK)
                     {
-                        return;
+                        Environment.Exit(0);
                     }
 
                     if (Path.GetFileName(dialog.SelectedPath) == "The Outlast Trials")
