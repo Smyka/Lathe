@@ -164,6 +164,9 @@
         rkJggg==
 </value>
   </data>
+  <metadata name="FOVtooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>156, 5</value>
+  </metadata>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -175,9 +178,6 @@
         AAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="FOVtooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>156, 5</value>
-  </metadata>
   <data name="pictureBox2.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -192,17 +192,12 @@
   <metadata name="ScreenPercentagetooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>156, 5</value>
   </metadata>
-  <data name="pictureBox3.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAARZJREFUOE+F080qRWEUxnHHR/mmRJKQgUwUicTQQJIwEQZMSEI+ioFMXYaZC3E5
-        Jq7hp8U+xz6rw/lP9lrPet717nft/ba0/AHaMYVxtOb6n2Abx9jECtawh9vIs78GunCHiVyrgiVcoZIL
-        rXiKJknvjaMkbRinZS3E2HmkTvzRP/DaQJ/DcjVpw1k2BTiJ1856gPNqsI6FbAjwjpesB9jHQAT3GMyG
-        AJ94y3qAmThKBI/oy4agSYNpzEewg9lsCJo02PoePLpxlA1BkwaX5eQZnXWOfxpgFBtloQ83da7fQY0l
-        LT77QzzLehQmcY2OukIJDBV/bH+ufYMeHOKimHKluJWLxcKD/zaoUQx2tbiFu0WDhgu/AAcgR0WcDpEM
-        AAAAAElFTkSuQmCC
-</value>
-  </data>
+  <metadata name="FOVtooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>156, 5</value>
+  </metadata>
+  <metadata name="ScreenPercentagetooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>156, 5</value>
+  </metadata>
   <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>156, 17</value>
   </metadata>

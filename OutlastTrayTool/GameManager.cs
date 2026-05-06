@@ -98,43 +98,7 @@ namespace OutlastTrayTool
 
         }
 
-        public void ChangeFogToggle(string userValue)
-        {
-            string fogValue = "1";
-            switch (userValue)
-            {
-                case "Disabled":
-                    fogValue = "0";
-                    break;
-            }
-
-                List<string> contents = File.ReadAllLines(_EngineIniConfigPath).ToList();
-            bool modified = false;
-            for (int i = 0; i < contents.Count; i++)
-            {
-
-                if (contents[i].Contains("r.Fog="))
-                {
-                    contents[i] = $"r.Fog={fogValue}";
-                    modified = true;
-                }
-            }
-            if (modified)
-            {
-                // change fov values
-                File.WriteAllLines(_EngineIniConfigPath, contents);
-                _userConfig.ChangeProperty("fog", userValue);
-            }
-            else
-            {
-                // if it can't find the settings in game.ini, create them
-                contents.Add("[ConsoleVariables]");
-                contents.Add($"r.Fog={fogValue}");
-                File.WriteAllLines(_EngineIniConfigPath, contents);
-                _userConfig.ChangeProperty("fog", userValue);
-            }
-
-        }
+       
 
 
 

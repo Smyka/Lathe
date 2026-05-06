@@ -78,7 +78,6 @@ namespace OutlastTrayTool
             LoadTrayIcon();
             LoadFOVSlider();
             LoadScreenPercentageSlider();
-            LoadFogComboBox();
             LoadCheckboxes();
             LoadStartupComboBox();
             LoadPresenceComboBox();
@@ -359,10 +358,6 @@ namespace OutlastTrayTool
             trackBar2.Value = config.LoadConfig()["screenPercentage"];
         }
 
-        private void LoadFogComboBox()
-        {
-            comboBox1.SelectedItem = config.LoadConfig()["fog"].ToString();
-        }
 
         private void LoadPresenceComboBox()
         {
@@ -797,11 +792,6 @@ namespace OutlastTrayTool
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            gameManager.ChangeFogToggle(comboBox1.SelectedItem.ToString());
-            MessageBox.Show($"Changed fog to {comboBox1.SelectedItem.ToString()}");
-        }
 
         private void pictureBox1_Click_1(object sender, EventArgs e)
         {

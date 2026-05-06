@@ -35,14 +35,9 @@ namespace OutlastTrayTool
   private TrackBar trackBar2;
   private ToolTip ScreenPercentagetooltip;
   private Label label7;
-  private Panel panel7;
-  private ComboBox comboBox1;
-  private Button button8;
-  private Label label8;
   private ToolTip toolTip1;
   private PictureBox pictureBox1;
   private PictureBox pictureBox2;
-  private PictureBox pictureBox3;
   private Label label9;
   private FlowLayoutPanel flowLayoutPanel3;
   private Panel panel8;
@@ -93,11 +88,6 @@ namespace OutlastTrayTool
             button7 = new Button();
             label3 = new Label();
             trackBar2 = new TrackBar();
-            panel7 = new Panel();
-            pictureBox3 = new PictureBox();
-            button8 = new Button();
-            comboBox1 = new ComboBox();
-            label8 = new Label();
             FOVtooltip = new ToolTip(components);
             pictureBox8 = new PictureBox();
             pictureBox5 = new PictureBox();
@@ -128,8 +118,6 @@ namespace OutlastTrayTool
             panel6.SuspendLayout();
             ((ISupportInitialize)pictureBox2).BeginInit();
             ((ISupportInitialize)trackBar2).BeginInit();
-            panel7.SuspendLayout();
-            ((ISupportInitialize)pictureBox3).BeginInit();
             ((ISupportInitialize)pictureBox8).BeginInit();
             ((ISupportInitialize)pictureBox5).BeginInit();
             panel8.SuspendLayout();
@@ -465,7 +453,6 @@ namespace OutlastTrayTool
             flowLayoutPanel2.AutoScroll = true;
             flowLayoutPanel2.Controls.Add(panel5);
             flowLayoutPanel2.Controls.Add(panel6);
-            flowLayoutPanel2.Controls.Add(panel7);
             flowLayoutPanel2.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel2.Location = new Point(40, 66);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
@@ -587,70 +574,6 @@ namespace OutlastTrayTool
             trackBar2.Value = 100;
             trackBar2.Scroll += trackBar2_Scroll;
             // 
-            // panel7
-            // 
-            panel7.BorderStyle = BorderStyle.FixedSingle;
-            panel7.Controls.Add(pictureBox3);
-            panel7.Controls.Add(button8);
-            panel7.Controls.Add(comboBox1);
-            panel7.Controls.Add(label8);
-            panel7.Location = new Point(3, 315);
-            panel7.Name = "panel7";
-            panel7.Size = new Size(292, 116);
-            panel7.TabIndex = 15;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(247, 23);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(19, 19);
-            pictureBox3.TabIndex = 11;
-            pictureBox3.TabStop = false;
-            FOVtooltip.SetToolTip(pictureBox3, "Enables/disables fog rendering in-game");
-            // 
-            // button8
-            // 
-            button8.BackColor = Color.FromArgb(47, 54, 61);
-            button8.FlatAppearance.BorderColor = Color.FromArgb(113, 123, 133);
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Segoe UI", 9.75F);
-            button8.ForeColor = Color.Honeydew;
-            button8.Location = new Point(191, 63);
-            button8.Name = "button8";
-            button8.Size = new Size(75, 27);
-            button8.TabIndex = 7;
-            button8.Text = "Apply";
-            button8.UseVisualStyleBackColor = false;
-            button8.Click += button8_Click;
-            // 
-            // comboBox1
-            // 
-            comboBox1.BackColor = SystemColors.Control;
-            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBox1.FlatStyle = FlatStyle.Flat;
-            comboBox1.Font = new Font("Segoe UI", 9F);
-            comboBox1.FormattingEnabled = true;
-            comboBox1.ItemHeight = 15;
-            comboBox1.Items.AddRange(new object[] { "Enabled", "Disabled" });
-            comboBox1.Location = new Point(108, 63);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(74, 23);
-            comboBox1.TabIndex = 9;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label8.ForeColor = Color.Honeydew;
-            label8.Location = new Point(133, 19);
-            label8.Name = "label8";
-            label8.Size = new Size(36, 21);
-            label8.TabIndex = 5;
-            label8.Text = "Fog";
-            toolTip1.SetToolTip(label8, "Enables/disables fog rendering in-game\r\n");
-            label8.Click += label8_Click;
-            // 
             // pictureBox8
             // 
             pictureBox8.Location = new Point(247, 23);
@@ -658,7 +581,6 @@ namespace OutlastTrayTool
             pictureBox8.Size = new Size(19, 19);
             pictureBox8.TabIndex = 11;
             pictureBox8.TabStop = false;
-            FOVtooltip.SetToolTip(pictureBox8, "Enables/disables fog rendering in-game");
             // 
             // pictureBox5
             // 
@@ -667,7 +589,6 @@ namespace OutlastTrayTool
             pictureBox5.Size = new Size(19, 19);
             pictureBox5.TabIndex = 11;
             pictureBox5.TabStop = false;
-            FOVtooltip.SetToolTip(pictureBox5, "Enables/disables fog rendering in-game");
             // 
             // toolTip1
             // 
@@ -683,7 +604,6 @@ namespace OutlastTrayTool
             label17.Size = new Size(163, 21);
             label17.TabIndex = 5;
             label17.Text = "Discord Rich Presence";
-            toolTip1.SetToolTip(label17, "Enables/disables fog rendering in-game\r\n");
             // 
             // label15
             // 
@@ -695,7 +615,6 @@ namespace OutlastTrayTool
             label15.Size = new Size(136, 21);
             label15.TabIndex = 5;
             label15.Text = "Launch on Startup";
-            toolTip1.SetToolTip(label15, "Enables/disables fog rendering in-game\r\n");
             // 
             // panel8
             // 
@@ -859,9 +778,9 @@ namespace OutlastTrayTool
             Controls.Add(panel3);
             Controls.Add(panel1);
             Controls.Add(panel8);
+            Controls.Add(panel4);
             Controls.Add(panel2);
             Controls.Add(panel9);
-            Controls.Add(panel4);
             Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(930, 400);
             Name = "Form1";
@@ -885,9 +804,6 @@ namespace OutlastTrayTool
             panel6.PerformLayout();
             ((ISupportInitialize)pictureBox2).EndInit();
             ((ISupportInitialize)trackBar2).EndInit();
-            panel7.ResumeLayout(false);
-            panel7.PerformLayout();
-            ((ISupportInitialize)pictureBox3).EndInit();
             ((ISupportInitialize)pictureBox8).EndInit();
             ((ISupportInitialize)pictureBox5).EndInit();
             panel8.ResumeLayout(false);
